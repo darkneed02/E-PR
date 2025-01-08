@@ -12,6 +12,7 @@
                                     <ul class="mt-2 mb-0 list-group" id="dataList">
                                         <li class="list-group-item" data-value="A สินทรัพย์">A สินทรัพย์</li>
                                         <li class="list-group-item" data-value="K ศูนย์ต้นทุน">K ศูนย์ต้นทุน</li>
+                                        <li class="list-group-item" data-value="">ไม่เลือก</li>
                                     </ul>
                                 </div><!--end col-->
                             </div><!--end row-->
