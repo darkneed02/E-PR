@@ -51,12 +51,8 @@
                             </div><!--end media-body-->
                         </div>
                         <div class="dropdown-divider mt-0"></div>
-                        <small class="text-muted px-2 pb-1 d-block">Account</small>
-                        <a class="dropdown-item" href="pages-profile.php"><i class="las la-user fs-18 me-1 align-text-bottom"></i> Profile</a>
-                        <small class="text-muted px-2 py-1 d-block">Settings</small>                        
-                        <a class="dropdown-item" href="pages-profile.php"><i class="las la-cog fs-18 me-1 align-text-bottom"></i>Account Settings</a>
-                        <a class="dropdown-item" href="auth-lock-screen.php" target="_blank"><i class="las la-lock fs-18 me-1 align-text-bottom"></i> Lock</a>
-                        <a class="dropdown-item" href="pages-faq.php"><i class="las la-question-circle fs-18 me-1 align-text-bottom"></i> Help Center</a>                       
+                        <small class="text-muted px-2 pb-1 d-block">บัญชี</small>
+                        <a class="dropdown-item" href="pages-profile.php"><i class="las la-user fs-18 me-1 align-text-bottom"></i> โปรไฟล์</a>                       
                         <div class="dropdown-divider mb-0"></div>
                         <a class="dropdown-item text-danger" href="logout.php"><i class="las la-power-off fs-18 me-1 align-text-bottom"></i> Logout</a>
                     </div>
