@@ -293,6 +293,7 @@
                                                     <div class="col-sm-10">
                                                         <select id="default_vat_v" class="form-control" name="type_vat">
                                                             <option value="" disabled selected>กรุณาเลือกภาษี</option>
+                                                            <option value="0">0%</option>
                                                             <option value="3">3%</option>
                                                             <option value="5">5%</option>
                                                             <option value="7">7%</option>
@@ -308,7 +309,7 @@
                                                         <select id="default_g_l" class="form-control" name="type_doc">
                                                             <option value="" disabled selected>กรุณาเลือกแขนงบัญชี</option>
                                                             <?php foreach ($view_g_l as $data): ?>
-                                                                <option value="<?php echo $data['g_l_name']; ?>">
+                                                                <option value="<?php echo $data['g_l_id']; ?>">
                                                                     <?php echo $data['g_l_name']; ?>
                                                                 </option>
                                                             <?php endforeach; ?>
@@ -321,7 +322,7 @@
                                                         <select id="default_fun_center" class="form-control" name="type_doc">
                                                             <option value="" disabled selected>กรุณาเลือกศูนย์ต้นทุน</option>
                                                             <?php foreach ($cost_center as $data): ?>
-                                                                <option value="<?php echo $data['cost_name']; ?>">
+                                                                <option value="<?php echo $data['cost_id']; ?>">
                                                                     <?php echo $data['cost_name']; ?>
                                                                 </option>
                                                             <?php endforeach; ?>
@@ -334,7 +335,7 @@
                                                         <select id="default_spoce" class="form-control" name="type_doc">
                                                             <option value="" disabled selected>กรุณาเลือกขอบเขตหน้าที่</option>
                                                             <?php foreach ($view_scope as $data): ?>
-                                                                <option value="<?php echo $data['scope_name']; ?>">
+                                                                <option value="<?php echo $data['id_scope']; ?>">
                                                                     <?php echo $data['scope_name']; ?>
                                                                 </option>
                                                             <?php endforeach; ?>
@@ -347,7 +348,7 @@
                                                         <select id="default_messsinons" class="form-control" name="type_doc">
                                                             <option value="" disabled selected>กรุณาเลือกภาระผูกพันธ์</option>
                                                             <?php foreach ($commitment as $data): ?>
-                                                                <option value="<?php echo $data['short_text']; ?>">
+                                                                <option value="<?php echo $data['id_comment_id']; ?>">
                                                                     <?php echo $data['short_text']; ?>
                                                                 </option>
                                                             <?php endforeach; ?>
@@ -381,7 +382,7 @@
                                                         <select id="default_funds_center" class="form-control" name="type_doc">
                                                             <option value="" disabled selected>กรุณาเลือกศนูย์เงินทุน</option>
                                                             <?php foreach ($s_fund as $data): ?>
-                                                                <option value="<?php echo $data['name_s_ct']; ?>">
+                                                                <option value="<?php echo $data['id_s_ct']; ?>">
                                                                     <?php echo $data['name_s_ct']; ?>
                                                                 </option>
                                                             <?php endforeach; ?>
