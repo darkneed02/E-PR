@@ -369,7 +369,7 @@
                                                         <select id="default_money_center" class="form-control" name="type_doc">
                                                             <option value="" disabled selected>กรุณาเลือกเงินทุน</option>
                                                             <?php foreach ($fund as $data): ?>
-                                                                <option value="<?php echo $data['fund_name']; ?>">
+                                                                <option value="<?php echo $data['fund_id']; ?>">
                                                                     <?php echo $data['fund_name']; ?>
                                                                 </option>
                                                             <?php endforeach; ?>
