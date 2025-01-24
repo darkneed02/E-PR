@@ -51,6 +51,7 @@ $(document).ready(function () {
             let group_material = $(this).find("td").eq(8).text();
             let factor = $(this).find("td").eq(9).text();
             let store_mm = $(this).find("td").eq(10).text();
+            let pushuing_group = $(this).find("td").eq(11).text();
             let price = $(this).find("td").eq(12).text();
             let total = $(this).find("td").eq(13).text();
 
@@ -65,10 +66,12 @@ $(document).ready(function () {
               group_material,
               factor,
               store_mm,
+              pushuing_group,
               price,
               total,
             });
           });
+
 
           // ส่งข้อมูลรูปแบบ ajax
           $.ajax({

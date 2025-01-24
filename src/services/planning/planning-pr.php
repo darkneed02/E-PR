@@ -52,12 +52,13 @@
             $group_material = $row['group_material'];
             $factor = $row['factor'];
             $store_mm = $row['store_mm'];
+            $pushuing_group = $row['pushuing_group'];
             $price = $row['price'];
             $total = $row['total'];
 
             //** เพิ่มข้อมูลแผน PR  */
             if(add_planning_pr($conn,$doc_num,$type_doc,$start_date,$end_date,$header,$deatil,$id_list,$group_account,$material,$short_text,$quantity,$unit,$delivery_date,$currentDate,$group_material,$factor,$store_mm
-            ,$store_mm,$price,$default_vat,$default_cure,$total,$default_g_l,$default_fun_center,$default_money_center,$default_spoce,$default_funds_center,$default_messsinons,$_SESSION['user_id'],1,$grand_total)){
+            ,$pushuing_group,$price,$default_vat,$default_cure,$total,$default_g_l,$default_fun_center,$default_money_center,$default_spoce,$default_funds_center,$default_messsinons,$_SESSION['user_id'],1,$grand_total)){
                 $resultMessage = "ทำการบันทึกขออนุมัติสำเร็จ";
             }else{
                 $resultMessage = "ข้อมูลผิดพลาด กรุณาแจ้งผู้ดูแลระบบ" . "<br>";

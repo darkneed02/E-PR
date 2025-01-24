@@ -92,7 +92,7 @@
                                 <div class="col-lg-12">
                                     <ul class="mt-2 mb-0 list-group" id="dataListMMG">
                                         <?php foreach ($datagroupMM as $item): ?>
-                                            <li class="list-group-item" data-value="<?= $item['name_group'] ?>">
+                                            <li class="list-group-item" data-value="<?= $item['id_group'] ?>">
                                             <?= $item['id_group'] ?> || <?= $item['name_group'] ?>
                                             </li>
                                         <?php endforeach; ?>
@@ -120,7 +120,7 @@
                                 <div class="col-lg-12">
                                     <ul class="mt-2 mb-0 list-group" id="dataListUI">
                                         <?php foreach ($datafactory as $item): ?>
-                                            <li class="list-group-item" data-value="<?= $item['name_factory'] ?>">
+                                            <li class="list-group-item" data-value="<?= $item['id_factory'] ?>">
                                             <?= $item['id_factory'] ?> || <?= $item['name_factory'] ?>
                                             </li>
                                         <?php endforeach; ?>
@@ -148,7 +148,7 @@
                                 <div class="col-lg-12">
                                     <ul class="mt-2 mb-0 list-group" id="dataListMMR">
                                         <?php foreach ($datastorage as $item): ?>
-                                            <li class="list-group-item" data-value="<?= $item['detail'] ?>">
+                                            <li class="list-group-item" data-value="<?= $item['name_st_lo'] ?>">
                                             <?= $item['name_st_lo'] ?> || <?= $item['detail'] ?>
                                             </li>
                                         <?php endforeach; ?>
@@ -176,7 +176,7 @@
                                 <div class="col-lg-12">
                                     <ul class="mt-2 mb-0 list-group" id="dataListMMRL">
                                         <?php foreach ($datapurchasing_group as $item): ?>
-                                            <li class="list-group-item" data-value="<?= $item['name_ph_gt'] ?>">
+                                            <li class="list-group-item" data-value="<?= $item['id_ph_gt'] ?>">
                                             <?= $item['id_ph_gt'] ?> || <?= $item['name_ph_gt'] ?>
                                             </li>
                                         <?php endforeach; ?>
