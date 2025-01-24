@@ -42,7 +42,7 @@ if (isset($_POST['approve_id'])) {
                     'fund_money' => $row['fund_money'],
                     'scpoe_fund' => $row['scpoe_fund'],
                     'commitments' => $row['commitments'],
-                    'procurement_group' => $row['procurement_group'],
+                    'procurement_group_t' => $row['procurement_group'],
                     'fund_center' => $row['fund_center'],
                     'procurement_message' => $row['procurement_message'],
                     'item_notes' => $row['item_notes'],

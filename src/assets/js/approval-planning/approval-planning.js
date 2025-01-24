@@ -49,7 +49,7 @@ $(document).on("click", ".view-btn", function () {
         $("#default_fun_center").val(response.data.fund_money); // แสดงกลุ่มเงินทุน
         $("#default_spoce").val(response.data.scpoe_fund); // แสดงกลุ่มขอบเขต
         $("#default_messsinons").val(response.data.commitments); // แสดงกลุ่มภาละพูกพัน
-        $("#default_money_center").val(response.data.procurement_group); // แสดงกลุ่มจัดซื้อ
+        $("#default_money_center").val(response.data.procurement_group_t); // แสดงกลุ่มจัดซื้อ
         $("#default_Funds_center").val(response.data.fund_center); // แสดงกลุ่มศนูย์เงินทุน
         $("#meagess_job").val(response.data.procurement_message); // ข้อความจัดซื้อจัดจ้าง
         $("#meagess_list").val(response.data.item_notes); // หมายเหตุรายการ
@@ -76,7 +76,7 @@ $(document).on("click", ".view-btn", function () {
                         <td>${row.mm_group}</td>
                         <td>${row.factory_mm}</td>
                         <td>${row.product_storage}</td>
-                        <td>${row.factory_mm}</td>
+                        <td>${row.procurement_group}</td>
                         <td>${row.price}</td>
                         <td>${row.total}</td>
                     </tr>
