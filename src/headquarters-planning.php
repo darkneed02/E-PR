@@ -39,7 +39,7 @@
                             </div><!--end card-header-->
                             <div class="card-body pt-0">
                                 <div class="table-responsive">
-                                    <table class="table  mb-0 table-centered">
+                                    <table class="table  mb-0 table-centered" id="datatable_1">
                                         <thead class="table-light">
                                             <tr>
                                                 <th>ลำดับ</th>
