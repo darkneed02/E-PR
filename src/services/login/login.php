@@ -33,7 +33,6 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
 
             $response = [
                 'status' => 'success',
-                'message' => 'เข้าสู่ระบบสำเร็จ',
                 'url' => 'planning-pr.php' // ค่าเริ่มต้น
             ];
 

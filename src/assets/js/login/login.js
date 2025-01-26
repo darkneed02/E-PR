@@ -28,7 +28,6 @@ $(document).ready(function () {
           Swal.fire({
             icon: "success",
             title: "เข้าสู่ระบบสำเร็จ",
-            text: response.message,
             showConfirmButton: false,
             timer: 1500,
           }).then(function () {
