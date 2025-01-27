@@ -6,7 +6,7 @@
     include 'partials/title-meta.php' ?>
 
     <link href="assets/libs/simple-datatables/style.css" rel="stylesheet" type="text/css" />
-    
+
     <?php include 'partials/head-css.php' ?>
 </head>
 
@@ -27,7 +27,7 @@
         <!-- Page Content-->
         <div class="page-content">
             <div class="container-xxl">
-            <div class="row justify-content-center">
+                <div class="row justify-content-center">
                     <div class="col-md-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
@@ -39,7 +39,7 @@
                             </div><!--end card-header-->
                             <div class="card-body pt-0">
                                 <div class="table-responsive">
-                                    <table class="table  mb-0 table-centered">
+                                    <table class="table  mb-0 table-centered" id="datatable_1">
                                         <thead class="table-light">
                                             <tr>
                                                 <th>ลำดับ</th>
@@ -56,29 +56,41 @@
                                             <?php if (!empty($planningData)): ?>
                                                 <?php foreach ($planningData as $index => $row): ?>
                                                     <tr>
-                                                        <td><?php echo $index + 1; // ลำดับ ?></td>
+                                                        <td><?php echo $index + 1; // ลำดับ 
+                                                            ?></td>
                                                         <td><?php echo htmlspecialchars($row['doc_num']); ?></td>
                                                         <td><?php echo htmlspecialchars($row['title']); ?></td>
-                                                        <td><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); // fullname ?></td>
+                                                        <td><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); // fullname 
+                                                            ?></td>
                                                         <td><?php echo htmlspecialchars($row['department_name']); ?></td>
-                                                        <td><?php 
-                                                                $create_date = new DateTime($row['create_date'], new DateTimeZone('UTC')); // ปรับจาก UTC
-                                                                $create_date->setTimezone(new DateTimeZone('Asia/Bangkok')); // กำหนดเขตเวลาไทย
-                                                                $thai_year = $create_date->format('Y') + 543; // เพิ่ม 543 ปี
-                                                                echo $create_date->format('d/m/') . $thai_year; // ฟอร์แมต วว/ดด/ปปปป แบบไทย
+                                                        <td><?php
+                                                            $create_date = new DateTime($row['create_date'], new DateTimeZone('UTC')); // ปรับจาก UTC
+                                                            $create_date->setTimezone(new DateTimeZone('Asia/Bangkok')); // กำหนดเขตเวลาไทย
+                                                            $thai_year = $create_date->format('Y') + 543; // เพิ่ม 543 ปี
+                                                            echo $create_date->format('d/m/') . $thai_year; // ฟอร์แมต วว/ดด/ปปปป แบบไทย
                                                             ?>
                                                         </td>
-                                                        <td><?php 
-                                                            if($row['status'] == 0){
-                                                                echo '<span class="badge bg-transparent border border-info text-info">ร่างแผน</span>';
-                                                            }else if($row['status'] == 1){
-                                                                echo '<span class="badge bg-transparent border border-primary text-primary">ขออนุมัติ</span>';
-                                                            }else if($row['status'] == 5){
-                                                                echo '<span class="badge bg-transparent border border-success text-success">อนุมัติเรียบร้อย</span>';
-                                                            }else if($row['status'] == 10){
-                                                                echo '<span class="badge bg-transparent border border-danger text-danger">ยกเลิกแผน</span>';
+                                                        <td><?php
+                                                            $status_labels = [
+                                                                0 => ['text' => 'ร่างแผน', 'class' => 'info'],
+                                                                1 => ['text' => 'ขออนุมัติ', 'class' => 'primary'],
+                                                                2 => ['text' => 'ระดับสาขา', 'class' => 'warning'],
+                                                                3 => ['text' => 'ระดับจังหวัด', 'class' => 'warning'],
+                                                                4 => ['text' => 'ระดับเขต', 'class' => 'warning'],
+                                                                5 => ['text' => 'อนุมัติสำนักงานใหญ่', 'class' => 'success'],
+                                                                10 => ['text' => 'ไม่อนุมัติแผน', 'class' => 'danger']
+                                                            ];
+
+                                                            $status = $row['status'];
+                                                            if (isset($status_labels[$status])) {
+                                                                $label = $status_labels[$status];
+                                                                echo '<span class="badge bg-transparent border border-' . $label['class'] . ' text-' . $label['class'] . '">' . $label['text'] . '</span>';
+                                                            } else {
+                                                                // กรณีสถานะไม่อยู่ในรายการ
+                                                                echo '<span class="badge bg-transparent border border-secondary text-secondary">สถานะไม่ระบุ</span>';
                                                             }
-                                                        ?></td>
+                                                            ?>
+                                                        </td>
                                                         <td class="text-end">
                                                             <button type="button" class="btn btn-outline-success fs-12 export-btn" data-report_id="<?php echo $row['doc_num'] ?>"><i class="far fa-file-alt"></i> นำข้อมูลออก</button>
                                                         </td>

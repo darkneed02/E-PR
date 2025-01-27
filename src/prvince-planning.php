@@ -356,6 +356,9 @@
 
     
     <script src="assets/js/planning-pr/update-planning.js"></script>
+
+    <script src="assets/js/approval-planning/approval-planning.js"></script> <!-- อนุมัติแผน -->
+    <script src="assets/js/approval-planning/cancel-planning.js"></script> <!-- ยกเลิกแผน -->
     
     <script src="assets/libs/simple-datatables/umd/simple-datatables.js"></script>
     <script src="assets/js/pages/datatable.init.js"></script>

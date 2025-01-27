@@ -8,7 +8,8 @@
     <link href="assets/libs/mobius1-selectr/selectr.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/huebee/huebee.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/vanillajs-datepicker/css/datepicker.min.css" rel="stylesheet" type="text/css" />
-    
+    <link href="assets/libs/simple-datatables/style.css" rel="stylesheet" type="text/css" />
+
 
     <?php include 'partials/head-css.php' ?>
 </head>
@@ -40,13 +41,13 @@
                                     </div><!--end col-->
                                     <div class="col text-end">
                                         <button type="button" class="btn btn-block  btn-success" id="btn_requst_approve"><i class="far fa-check-circle"></i>
-                                             <span class="fw-bold">ขออนุมัติแผน</span>
+                                            <span class="fw-bold">ขออนุมัติแผน</span>
                                         </button>
                                         <button type="button" class="btn btn-block btn-info" id="btn_darft_planning"><i class="far fa-copy"></i>
-                                             <span class="fw-bold">บันทึกร่างแผน</span>
+                                            <span class="fw-bold">บันทึกร่างแผน</span>
                                         </button>
                                         <button type="button" class="btn btn-block btn-danger" id="btn_cancel_planning"><i class="las la-times-circle"></i></i>
-                                             <span class="fw-bold">รีเซ็ตข้อมูล</span>
+                                            <span class="fw-bold">รีเซ็ตข้อมูล</span>
                                         </button>
                                     </div><!--end col-->
                                 </div> <!--end row-->
@@ -55,7 +56,7 @@
                                 <div class="row g-2">
                                     <div class="col-md-4">
                                         <label class="mb-2">เอกสาร</label>
-                                         <input type="text" class="form-control" name="doc_num" id="doc_num"  readonly>
+                                        <input type="text" class="form-control" name="doc_num" id="doc_num" readonly>
                                     </div><!-- end col -->
                                     <div class="col-md-4">
                                         <label class="mb-2">ประเภทเอกสาร</label>
@@ -74,10 +75,10 @@
                                             <input type="date" class="form-control rounded-end" name="end_date" id="end_date" placeholder="End" aria-label="EndDate">
                                         </div>
                                     </div><!-- end col -->
-                                    <hr> 
+                                    <hr>
                                     <div class="col-md-6">
-                                        <label class="mb-2">บันทึกส่วนหัว</label> 
-                                        <input type="text" class="form-control" name="header" id="header"  max="80">
+                                        <label class="mb-2">บันทึกส่วนหัว</label>
+                                        <input type="text" class="form-control" name="header" id="header" max="80">
                                     </div><!-- end col -->
                                     <div class="col-md-6">
                                         <label class="mb-2">คำอธิบาย</label>
@@ -142,7 +143,7 @@
                     <div class="col-md-12 col-lg-12">
                         <div class="card">
                             <div class="card-body pt-0">
-                            <ul class="nav nav-tabs" role="tablist">
+                                <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#matrial" role="tab" aria-selected="true">ข้อมูลวัสดุ</a>
                                     </li>
@@ -207,18 +208,18 @@
                                                 <div class="mb-3 row align-items-center">
                                                     <div class="col-sm-3"></div>
                                                     <div class="col-sm-9">
-                                                    <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="options_data" id="exampleRadios1" value="ที่ปิด" checked>
-                                                <label class="form-check-label" for="exampleRadios1">
-                                                    ที่ปิด
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="options_data" id="exampleRadios2" value="ID คงที่">
-                                                <label class="form-check-label" for="exampleRadios2">
-                                                    ID คงที่
-                                                </label>
-                                            </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="options_data" id="exampleRadios1" value="ที่ปิด" checked>
+                                                            <label class="form-check-label" for="exampleRadios1">
+                                                                ที่ปิด
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="options_data" id="exampleRadios2" value="ID คงที่">
+                                                            <label class="form-check-label" for="exampleRadios2">
+                                                                ID คงที่
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -272,7 +273,7 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                    </div>                                                    
+                                                    </div>
                                                 </div>
                                                 <div class="mb-3 row">
                                                     <label for="group_mm" class="col-sm-2 col-form-label text-lg-end">กลุ่มวัสดุ</label>
@@ -440,39 +441,41 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                <?php if (!empty($status_planning_darft)): ?>
-                                                    <?php foreach ($status_planning_darft as $index => $row): ?>
-                                                        <?php if ($row['status'] == 0): // ตรวจสอบสถานะ ?>
-                                                            <tr>
-                                                                <td><?php echo $index + 1; // ลำดับ ?></td>
-                                                                <td><?php echo $row['doc_num']; ?></td>
-                                                                <td><?php echo $row['title'];?></td>
-                                                                <td><?php 
-                                                                    $create_date = new DateTime($row['create_date'], new DateTimeZone('UTC')); // ปรับจาก UTC
-                                                                    $create_date->setTimezone(new DateTimeZone('Asia/Bangkok')); // กำหนดเขตเวลาไทย
-                                                                    $thai_year = $create_date->format('Y') + 543; // เพิ่ม 543 ปี
-                                                                    echo $create_date->format('d/m/') . $thai_year; // ฟอร์แมต วว/ดด/ปปปป แบบไทย
-                                                                ?></td>
-                                                                <td><?php echo "ร่างแผน"; ?></td> <!-- แสดงข้อความตามสถานะ -->
-                                                                <td class="text-end">
-                                                                    <a href="planning-darft.php?doc_num=<?php echo $row['doc_num']; ?>" class="btn btn-block btn-outline-success fas-12">รายละเอียด</a>
-                                                                    <button class="btn btn-block btn-outline-danger fas-12 cancel_data" data-view_data="<?php echo $row['doc_num']; ?>">ยกเลิก</button>
-                                                                </td>
-                                                            </tr>
-                                                        <?php endif; ?>
-                                                    <?php endforeach; ?>
-                                                <?php else: ?>
-                                                    <tr>
-                                                        <td colspan="6" class="text-center"><span class="badge bg-transparent border border-warning text-warning fs-20">ไม่พบข้อมูล</span></td>
-                                                    </tr>
-                                                <?php endif; ?>
-                                            </tbody>
+                                                    <?php if (!empty($status_planning_darft)): ?>
+                                                        <?php foreach ($status_planning_darft as $index => $row): ?>
+                                                            <?php if ($row['status'] == 0): // ตรวจสอบสถานะ 
+                                                            ?>
+                                                                <tr>
+                                                                    <td><?php echo $index + 1; // ลำดับ 
+                                                                        ?></td>
+                                                                    <td><?php echo $row['doc_num']; ?></td>
+                                                                    <td><?php echo $row['title']; ?></td>
+                                                                    <td><?php
+                                                                        $create_date = new DateTime($row['create_date'], new DateTimeZone('UTC')); // ปรับจาก UTC
+                                                                        $create_date->setTimezone(new DateTimeZone('Asia/Bangkok')); // กำหนดเขตเวลาไทย
+                                                                        $thai_year = $create_date->format('Y') + 543; // เพิ่ม 543 ปี
+                                                                        echo $create_date->format('d/m/') . $thai_year; // ฟอร์แมต วว/ดด/ปปปป แบบไทย
+                                                                        ?></td>
+                                                                    <td><?php echo "ร่างแผน"; ?></td> <!-- แสดงข้อความตามสถานะ -->
+                                                                    <td class="text-end">
+                                                                        <a href="planning-darft.php?doc_num=<?php echo $row['doc_num']; ?>" class="btn btn-block btn-outline-success fas-12">รายละเอียด</a>
+                                                                        <button class="btn btn-block btn-outline-danger fas-12 cancel_data" data-view_data="<?php echo $row['doc_num']; ?>">ยกเลิก</button>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; ?>
+                                                    <?php else: ?>
+                                                        <tr>
+                                                            <td colspan="6" class="text-center"><span class="badge bg-transparent border border-warning text-warning fs-20">ไม่พบข้อมูล</span></td>
+                                                        </tr>
+                                                    <?php endif; ?>
+                                                </tbody>
                                             </table><!--end /table-->
                                         </div><!--end /tableresponsive-->
                                     </div>
                                     <div class="tab-pane p-3" id="history_approval" role="tabpanel">
                                         <div class="table-responsive">
-                                            <table class="table  mb-0 table-centered">
+                                            <table class="table  mb-0 table-centered" id="datatable_1">
                                                 <thead class="table-light">
                                                     <tr>
                                                         <th>ลำดับ</th>
@@ -487,37 +490,48 @@
                                                     <?php if (!empty($status_planning_procssing)): ?>
                                                         <?php foreach ($status_planning_procssing as $index => $row): ?>
                                                             <tr>
-                                                                <td><?php echo $index + 1; // ลำดับ ?></td>
+                                                                <td><?php echo $index + 1; // ลำดับ 
+                                                                    ?></td>
                                                                 <td><?php echo $row['doc_num']; ?></td>
-                                                                <td><?php echo $row['title'];?></td>
-                                                                <td><?php 
-                                                                        $create_date = new DateTime($row['create_date'], new DateTimeZone('UTC')); // ปรับจาก UTC
-                                                                        $create_date->setTimezone(new DateTimeZone('Asia/Bangkok')); // กำหนดเขตเวลาไทย
-                                                                        $thai_year = $create_date->format('Y') + 543; // เพิ่ม 543 ปี
-                                                                        echo $create_date->format('d/m/') . $thai_year; // ฟอร์แมต วว/ดด/ปปปป แบบไทย
+                                                                <td><?php echo $row['title']; ?></td>
+                                                                <td><?php
+                                                                    $create_date = new DateTime($row['create_date'], new DateTimeZone('UTC')); // ปรับจาก UTC
+                                                                    $create_date->setTimezone(new DateTimeZone('Asia/Bangkok')); // กำหนดเขตเวลาไทย
+                                                                    $thai_year = $create_date->format('Y') + 543; // เพิ่ม 543 ปี
+                                                                    echo $create_date->format('d/m/') . $thai_year; // ฟอร์แมต วว/ดด/ปปปป แบบไทย
                                                                     ?>
                                                                 </td>
-                                                                <td><?php 
-                                                                    if($row['status'] == 0){
-                                                                        echo '<span class="badge bg-transparent border border-warning text-warning">ร่างแผน</span';
-                                                                    }else if($row['status'] == 1){
-                                                                        echo '<span class="badge bg-transparent border border-info text-info">ขออนุมัติ</span';
-                                                                    }else if($row['status'] == 10){
-                                                                        echo '<span class="badge bg-transparent border border-danger text-danger">ยกเลิก</span';
-                                                                    }else if($row['status'] == 5){
-                                                                        echo '<span class="badge bg-transparent border border-success text-success">อนุมัติเรียบร้อย</span';
+                                                                <td><?php
+                                                                    $status_labels = [
+                                                                        0 => ['text' => 'ร่างแผน', 'class' => 'info'],
+                                                                        1 => ['text' => 'ขออนุมัติ', 'class' => 'primary'],
+                                                                        2 => ['text' => 'ระดับสาขา', 'class' => 'warning'],
+                                                                        3 => ['text' => 'ระดับจังหวัด', 'class' => 'warning'],
+                                                                        4 => ['text' => 'ระดับเขต', 'class' => 'warning'],
+                                                                        5 => ['text' => 'อนุมัติสำนักงานใหญ่', 'class' => 'success'],
+                                                                        10 => ['text' => 'ไม่อนุมัติแผน', 'class' => 'danger']
+                                                                    ];
+
+                                                                    $status = $row['status'];
+                                                                    if (isset($status_labels[$status])) {
+                                                                        $label = $status_labels[$status];
+                                                                        echo '<span class="badge bg-transparent border border-' . $label['class'] . ' text-' . $label['class'] . '">' . $label['text'] . '</span>';
+                                                                    } else {
+                                                                        // กรณีสถานะไม่อยู่ในรายการ
+                                                                        echo '<span class="badge bg-transparent border border-secondary text-secondary">สถานะไม่ระบุ</span>';
                                                                     }
-                                                                ?></td>
+                                                                    ?>
+                                                                    </td>
                                                                 <!-- <td class="text-end">
                                                                     <button type="button" class="btn btn-block btn-outline-success fs-12 view-btn">รายละอียด</button>
                                                                 </td> -->
                                                             </tr>
                                                         <?php endforeach; ?>
                                                     <?php else: ?>
-                                                    <tr>
-                                                        <td colspan="4" class="text-center"><span class="badge bg-transparent border border-warning text-warning fs-20">ไม่พบข้อมูล</span></td>
-                                                    </tr>
-                                                <?php endif; ?>
+                                                        <tr>
+                                                            <td colspan="4" class="text-center"><span class="badge bg-transparent border border-warning text-warning fs-20">ไม่พบข้อมูล</span></td>
+                                                        </tr>
+                                                    <?php endif; ?>
                                                 </tbody>
                                             </table><!--end /table-->
                                         </div><!--end /tableresponsive-->
@@ -526,13 +540,13 @@
                             </div><!--end card-body-->
                         </div><!--end card-->
                     </div> <!--end col-->
-                </div><!--end row-->                
+                </div><!--end row-->
 
             </div><!-- container -->
-           
-            
+
+
             <!-- Modal Planning PR -->
-             <?php include 'assets/modal/planning-pr/planning-pr-modal.php' ?>
+            <?php include 'assets/modal/planning-pr/planning-pr-modal.php' ?>
             <!--Start Rightbar-->
             <?php include 'partials/endbar.php' ?>
             <!--end Rightbar-->
@@ -547,7 +561,7 @@
     <!-- Javascript  -->
     <!-- vendor js -->
     <?php include 'partials/vendorjs.php' ?>
-    
+
     <script src="assets/libs/mobius1-selectr/selectr.min.js"></script>
     <script src="assets/libs/huebee/huebee.pkgd.min.js"></script>
     <script src="assets/libs/vanillajs-datepicker/js/datepicker-full.min.js"></script>

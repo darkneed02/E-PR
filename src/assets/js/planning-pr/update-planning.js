@@ -228,50 +228,5 @@ $(document).ready(function () {
   handleApproval("#btn_approval_provinces", "doc_num_province");
   handleApproval("#btn_approval_disctract", "doc_num_disctracit");
   handleApproval("#btn_approval_headequerts", "doc_num_headequter");
-  
-  $("#cancel_btn_planning").on("click", function () {
-    let doc_num = $("#doc_num").val();
 
-    swal
-      .fire({
-        title: "ท่านต้องการยกเลิกแผนนี้ใช่หรือไม่",
-        text: "รหัสแผนของท่าน " + doc_num,
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonText: "ใช่, ทำรายการ",
-        cancelButtonText: "ยกเลิก",
-      })
-      .then((result) => {
-        if (result.isConfirmed) {
-          // ส่งข้อมูลรูปแบบ ajax
-          $.ajax({
-            url: "services/planning/update-planning.php",
-            method: "post",
-            data: {
-              doc_num_cancel: doc_num,
-            },
-            success: function (response) {
-              swal
-                .fire({
-                  icon: "success",
-                  title: "บันทึกข้อมูลสำเร็จ",
-                  text: response,
-                  showConfirmButton: "OK",
-                  timer: 1500,
-                })
-                .then(function () {
-                  window.location.href = "planning-pr.php";
-                });
-            },
-          });
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-          swal.fire({
-            icon: "info",
-            title: "การทำรายการถูกยกเลิก",
-            text: "คุณได้ยกเลิกการขออนุมัติแผน",
-            timer: 1500,
-          });
-        }
-      });
-  });
 });

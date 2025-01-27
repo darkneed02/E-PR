@@ -360,7 +360,8 @@
     <script src="assets/js/pages/datatable.init.js"></script>
 
     <script src="assets/js/app.js"></script>
-    <script src="assets/js/approval-planning/approval-planning.js"></script>
+    <script src="assets/js/approval-planning/approval-planning.js"></script> <!-- อนุมัติแผน -->
+    <script src="assets/js/approval-planning/cancel-planning.js"></script> <!-- ยกเลิกแผน -->
     <script src="assets/js/sweetalert2.js"></script>
     
 
