@@ -63,7 +63,7 @@
                                         <select id="default" name="type_doc">
                                             <option value="PR01" selected>ใบขอเสนอซื้อ</option>
                                             <option value="PR03">ใบขอเสนอจ้าง</option>
-                                            <option value="PR02">ใบขอเสนอเช้า</option>
+                                            <option value="PR02">ใบขอเสนอเช่า</option>
                                         </select>
                                     </div> <!-- end col -->
                                     <div class="col-md-4">
