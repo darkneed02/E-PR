@@ -73,11 +73,11 @@
                                                         <td><?php
                                                             $status_labels = [
                                                                 0 => ['text' => 'ร่างแผน', 'class' => 'info'],
-                                                                1 => ['text' => 'ขออนุมัติ', 'class' => 'primary'],
-                                                                2 => ['text' => 'ระดับสาขา', 'class' => 'warning'],
-                                                                3 => ['text' => 'ระดับจังหวัด', 'class' => 'warning'],
-                                                                4 => ['text' => 'ระดับเขต', 'class' => 'warning'],
-                                                                5 => ['text' => 'อนุมัติสำนักงานใหญ่', 'class' => 'success'],
+                                                                1 => ['text' => 'ระดับสาขา', 'class' => 'warning'],
+                                                                2 => ['text' => 'ระดับจังหวัด', 'class' => 'warning'],
+                                                                3 => ['text' => 'ระดับเขต', 'class' => 'warning'],
+                                                                4 => ['text' => 'อนุมัติสำนักงานใหญ่', 'class' => 'warning'],
+                                                                5 => ['text' => 'อนุมัติสำเร็จ', 'class' => 'success'],
                                                                 10 => ['text' => 'ไม่อนุมัติแผน', 'class' => 'danger']
                                                             ];
 

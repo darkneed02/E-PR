@@ -504,11 +504,11 @@
                                                                 <td><?php
                                                                     $status_labels = [
                                                                         0 => ['text' => 'ร่างแผน', 'class' => 'info'],
-                                                                        1 => ['text' => 'ขออนุมัติ', 'class' => 'primary'],
-                                                                        2 => ['text' => 'ระดับสาขา', 'class' => 'warning'],
-                                                                        3 => ['text' => 'ระดับจังหวัด', 'class' => 'warning'],
-                                                                        4 => ['text' => 'ระดับเขต', 'class' => 'warning'],
-                                                                        5 => ['text' => 'อนุมัติสำนักงานใหญ่', 'class' => 'success'],
+                                                                        1 => ['text' => 'ระดับสาขา', 'class' => 'warning'],
+                                                                        2 => ['text' => 'ระดับจังหวัด', 'class' => 'warning'],
+                                                                        3 => ['text' => 'ระดับเขต', 'class' => 'warning'],
+                                                                        4 => ['text' => 'อนุมัติสำนักงานใหญ่', 'class' => 'warning'],
+                                                                        5 => ['text' => 'อนุมัติสำเร็จ', 'class' => 'success'],
                                                                         10 => ['text' => 'ไม่อนุมัติแผน', 'class' => 'danger']
                                                                     ];
 
@@ -573,7 +573,6 @@
     <script src="assets/js/list_order.js"></script><!-- ตารางและ เงื่อนไขในการใช้งาน การเพิ่ม หรือลบ แถว -->
     <script src="assets/js/planning-pr/add-planning.js"></script><!-- บันทึกแผน และ บันทึกแผนร่าง -->
     <script src="assets/js/planning-pr/gen-running.js"></script> <!-- สร้างเลขรหัสรายการออกมา -->
-    <script src="assets/js/planning-pr/cancel-planning.js"></script> <!-- ยกเลิกแผน -->
     <script src="assets/libs/simple-datatables/umd/simple-datatables.js"></script>
     <script src="assets/js/pages/datatable.init.js"></script>
 </body>
