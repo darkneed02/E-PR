@@ -126,6 +126,8 @@ $(document).ready(function () {
   function handleApproval(buttonId, dataKey) {
     $(buttonId).on("click", function () {
       let doc_num = $("#doc_num").val();
+  
+      // ยืนยันการดำเนินการ
       swal
         .fire({
           title: "ท่านต้องการขออนุมัติแผนใช่หรือไม่",
@@ -137,44 +139,96 @@ $(document).ready(function () {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            console.log("การอนุมัติสำเร็จ รหัสแผน:", doc_num);
-            // ส่งข้อมูลผ่าน AJAX
-            $.ajax({
-              url: "services/planning/update-planning.php",
-              method: "POST",
-              data: { [dataKey]: doc_num },
-              success: function (response) {
-                swal
-                  .fire({
-                    icon: "success",
-                    title: "บันทึกข้อมูลสำเร็จ",
-                    text: response,
-                  })
-                  .then(function () {
-                    location.reload();
-                  });
-              },
-              error: function () {
-                swal.fire("ผิดพลาด", "ไม่สามารถอนุมัติแผนได้", "error");
-              },
-            });
-          } else if (result.dismiss === Swal.DismissReason.cancel) {
-            swal.fire({
-              icon: "info",
-              title: "การทำรายการถูกยกเลิก",
-              text: "คุณได้ยกเลิกการขออนุมัติแผน",
-            });
+            showLoading(); // แสดง SweetAlert สำหรับสถานะการโหลด
+            submitApprovalRequest(dataKey, doc_num); // ส่งข้อมูลผ่าน AJAX
+          } else {
+            showCancellation(); // แสดงข้อความกรณียกเลิก
           }
         });
     });
   }
-
-  // ใช้งานฟังก์ชัน
+  
+  // แสดง SweetAlert สำหรับสถานะการโหลด
+  function showLoading() {
+    swal.fire({
+      title: "กำลังดำเนินการ...",
+      html: '<div class="spinner-border text-primary" role="status"></div><br>กรุณารอสักครู่',
+      allowOutsideClick: false,
+      showConfirmButton: false,
+    });
+  }
+  
+  // แสดงข้อความกรณียกเลิก
+  function showCancellation() {
+    swal.fire({
+      icon: "info",
+      title: "การทำรายการถูกยกเลิก",
+      text: "คุณได้ยกเลิกการขออนุมัติแผน",
+    });
+  }
+  
+  // ส่งข้อมูลผ่าน AJAX
+  function submitApprovalRequest(dataKey, doc_num) {
+    let payload = {};
+    payload[dataKey] = doc_num;
+  
+    $.ajax({
+      url: "services/planning/update-planning.php",
+      method: "POST",
+      data: payload,
+      success: function (response) {
+        handleAjaxSuccess(response, doc_num); // จัดการเมื่อสำเร็จ
+      },
+      error: function () {
+        handleAjaxError(); // จัดการเมื่อเกิดข้อผิดพลาด
+      },
+    });
+  }
+  
+  // จัดการเมื่อ AJAX สำเร็จ
+  function handleAjaxSuccess(response, doc_num) {
+    try {
+      if (typeof response === "string") {
+        response = JSON.parse(response);
+      }
+  
+      setTimeout(() => {
+        if (response.success) {
+          swal.fire({
+            icon: "success",
+            title: "บันทึกข้อมูลสำเร็จ",
+            text: response.message || "การดำเนินการเสร็จสมบูรณ์ รหัสแผน: " + doc_num,
+          }).then(function () {
+            location.reload(); // รีโหลดหน้า
+          });
+        } else {
+          swal.fire({
+            icon: "error",
+            title: "เกิดข้อผิดพลาด",
+            text: response.message || "กรุณาลองอีกครั้ง",
+          });
+        }
+      }, 1000); // หน่วงเวลา 1 วินาทีก่อนแสดงผล
+    } catch {
+      swal.fire({
+        icon: "error",
+        title: "รูปแบบข้อมูลผิดพลาด",
+        text: "ไม่สามารถประมวลผลข้อมูลที่ตอบกลับได้",
+      });
+    }
+  }
+  
+  // จัดการเมื่อ AJAX เกิดข้อผิดพลาด
+  function handleAjaxError() {
+    swal.fire("ผิดพลาด", "ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้", "error");
+  }
+  
+  // เรียกใช้งานฟังก์ชัน
   handleApproval("#approveplanning_Btn", "doc_num_update");
   handleApproval("#btn_approval_provinces", "doc_num_province");
   handleApproval("#btn_approval_disctract", "doc_num_disctracit");
   handleApproval("#btn_approval_headequerts", "doc_num_headequter");
-
+  
   $("#cancel_btn_planning").on("click", function () {
     let doc_num = $("#doc_num").val();
 

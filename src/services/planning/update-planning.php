@@ -76,7 +76,7 @@
      */
     function handleApprovalRequest($conn, $level, $doc_num) {
         $currentDate = date('Y-m-d H:i:s');
-        $status = $level; // ระดับการอนุมัติจะสัมพันธ์กับ status
+        $status = $level; // ระดับการอนุมัติสัมพันธ์กับ status
     
         // Mapping branch/district/province/headquarters based on level
         $branch_id = $level >= 1 ? 1 : 0;
@@ -101,29 +101,39 @@
         // อัพเดตสถานะในแผน PR
         $updatePlanning = update_planning_status($conn, $status, $doc_num);
     
+        // สร้าง response แบบ JSON
         if ($updateApproval && $updatePlanning) {
-            return "ทำการบันทึกขออนุมัติสำเร็จ";
+            return json_encode(['success' => true, 'message' => "ทำการบันทึกขออนุมัติสำเร็จ"]);
         } else {
-            return "ข้อมูลผิดพลาด กรุณาแจ้งผู้ดูแลระบบ";
+            return json_encode(['success' => false, 'message' => "ข้อมูลผิดพลาด กรุณาแจ้งผู้ดูแลระบบ"]);
         }
     }
     
     // ตรวจสอบและจัดการคำขอ
     if (isset($_POST['doc_num_update'])) {
+        header('Content-Type: application/json'); // กำหนด Content-Type เป็น JSON
         echo handleApprovalRequest($conn, 2, $_POST['doc_num_update']); // ระดับสาขา
+        exit;
     }
     
     if (isset($_POST['doc_num_province'])) {
+        header('Content-Type: application/json'); // กำหนด Content-Type เป็น JSON
         echo handleApprovalRequest($conn, 3, $_POST['doc_num_province']); // ระดับจังหวัด
+        exit;
     }
     
     if (isset($_POST['doc_num_disctracit'])) {
+        header('Content-Type: application/json'); // กำหนด Content-Type เป็น JSON
         echo handleApprovalRequest($conn, 4, $_POST['doc_num_disctracit']); // ระดับเขต
+        exit;
     }
     
     if (isset($_POST['doc_num_headequter'])) {
+        header('Content-Type: application/json'); // กำหนด Content-Type เป็น JSON
         echo handleApprovalRequest($conn, 5, $_POST['doc_num_headequter']); // ระดับสำนักงานใหญ่
+        exit;
     }
+    
 
     if(isset($_POST['doc_num_cancel'])){
         $doc_num_cancel = $_POST['doc_num_cancel'];

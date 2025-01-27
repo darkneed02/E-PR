@@ -2,7 +2,8 @@ $(document).ready(function () {
   // บันทึกแผน PR ของอนุมัติ
   $("#btn_requst_approve").on("click", function () {
     let doc_num = $("#doc_num").val();
-
+    console.log("เริ่มต้น: กดปุ่มอนุมัติ - รหัสเอกสาร:", doc_num);
+  
     swal
       .fire({
         title: "ท่านต้องการขออนุมัติแผนใช่หรือไม่",
@@ -14,10 +15,20 @@ $(document).ready(function () {
       })
       .then((result) => {
         if (result.isConfirmed) {
+          console.log("ผู้ใช้ยืนยัน: เริ่มต้นแสดง Loading");
+  
+          // แสดง SweetAlert Loading Screen
+          swal.fire({
+            title: "กำลังดำเนินการ...",
+            html: '<div class="spinner-border text-primary" role="status"></div><br>กรุณารอสักครู่',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+          });
+  
+          // เตรียมข้อมูลที่จะส่งไปยังเซิร์ฟเวอร์
           let order = [];
-
-          // input textbox
-          let doc_num = $("#doc_num").val();
+  
+          // ตัวอย่างข้อมูลฟอร์ม
           let type_doc = $("#default").val();
           let start_date = $("#start_date").val();
           let end_date = $("#end_date").val();
@@ -38,8 +49,8 @@ $(document).ready(function () {
           let meagess_monkbon = $("#meagess_monkbon").val();
           let meagess_mm = $("#meagess_mm").val();
           let megess_price = $("#megess_price").val();
-
-          // table => id list_order
+  
+          // Table => id list_order
           $("#list_order tbody tr").each(function () {
             let id_list = $(this).find("td").eq(1).text();
             let group_account = $(this).find("td").eq(2).text();
@@ -54,7 +65,7 @@ $(document).ready(function () {
             let pushuing_group = $(this).find("td").eq(11).text();
             let price = $(this).find("td").eq(12).text();
             let total = $(this).find("td").eq(13).text();
-
+  
             order.push({
               id_list,
               group_account,
@@ -71,51 +82,64 @@ $(document).ready(function () {
               total,
             });
           });
-
-
-          // ส่งข้อมูลรูปแบบ ajax
-          $.ajax({
-            url: "services/planning/planning-pr.php",
-            method: "post",
-            data: {
-              order: JSON.stringify(order),
-              doc_num: doc_num,
-              type_doc: type_doc,
-              start_date: start_date,
-              end_date: end_date,
-              header: header,
-              deatil: deatil,
-              grand_total: grand_total,
-              default_cure: default_cure,
-              default_cure_unit: default_cure_unit,
-              default_vat_v: default_vat_v,
-              default_g_l: default_g_l,
-              default_fun_center: default_fun_center,
-              default_spoce: default_spoce,
-              default_messsinons: default_messsinons,
-              default_money_center: default_money_center,
-              default_funds_center: default_funds_center,
-              meagess_job: meagess_job,
-              meagess_list: meagess_list,
-              meagess_monkbon: meagess_monkbon,
-              meagess_mm: meagess_mm,
-              megess_price: megess_price,
-            },
-            success: function (response) {
-              swal
-                .fire({
-                  icon: "success",
-                  title: "บันทึกข้อมูลสำเร็จ",
-                  text: response,
-                  showConfirmButton: "OK",
-                  timer: 1500,
-                })
-                .then(function () {
-                  window.location.href = "planning-pr.php";
+  
+          // จำลองการส่งข้อมูล AJAX พร้อมหน่วงเวลา
+          setTimeout(() => {
+            $.ajax({
+              url: "services/planning/planning-pr.php",
+              method: "POST",
+              data: {
+                order: JSON.stringify(order),
+                doc_num: doc_num,
+                type_doc: type_doc,
+                start_date: start_date,
+                end_date: end_date,
+                header: header,
+                deatil: deatil,
+                grand_total: grand_total,
+                default_cure: default_cure,
+                default_cure_unit: default_cure_unit,
+                default_vat_v: default_vat_v,
+                default_g_l: default_g_l,
+                default_fun_center: default_fun_center,
+                default_spoce: default_spoce,
+                default_messsinons: default_messsinons,
+                default_money_center: default_money_center,
+                default_funds_center: default_funds_center,
+                meagess_job: meagess_job,
+                meagess_list: meagess_list,
+                meagess_monkbon: meagess_monkbon,
+                meagess_mm: meagess_mm,
+                megess_price: megess_price,
+              },
+              success: function (response) {
+                console.log("AJAX Success: รับข้อมูลจากเซิร์ฟเวอร์", response);
+  
+                swal
+                  .fire({
+                    icon: "success",
+                    title: "บันทึกข้อมูลสำเร็จ",
+                    text: response,
+                    showConfirmButton: true,
+                    timer: 1500,
+                  })
+                  .then(function () {
+                    console.log("การดำเนินการเสร็จสมบูรณ์");
+                    window.location.href = "planning-pr.php"; // เปลี่ยนเส้นทาง
+                  });
+              },
+              error: function () {
+                console.log("AJAX Error: เกิดข้อผิดพลาดในการส่งข้อมูล");
+                swal.fire({
+                  icon: "error",
+                  title: "เกิดข้อผิดพลาด",
+                  text: "ไม่สามารถส่งข้อมูลได้ กรุณาลองอีกครั้ง",
                 });
-            },
-          });
+              },
+            });
+          }, 1000); // หน่วงเวลา 1 วินาที
         } else if (result.dismiss === Swal.DismissReason.cancel) {
+          console.log("ผู้ใช้ยกเลิกการดำเนินการ");
           swal.fire({
             icon: "info",
             title: "การทำรายการถูกยกเลิก",
@@ -125,6 +149,10 @@ $(document).ready(function () {
         }
       });
   });
+  
+  
+  
+  
 
   // บันทุกแผน PR ร่าง
   $("#btn_darft_planning").on("click", function () {
