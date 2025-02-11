@@ -109,6 +109,7 @@
                                         <form id="information-user">
                                             <div class="row">
                                                 <div class="col-lg-6">
+                                                    <input type="hidden" class="form-control" name="uid" id="uid" value="<?php echo $_SESSION['user_id']; ?>">
                                                     <div class="mb-3 row">
                                                         <label for="firstname" class="col-sm-2 col-form-label text-end">ชื่อ</label>
                                                         <div class="col-sm-10">
@@ -161,7 +162,7 @@
                                                     </div>
                                                 </div><!--end col-->
                                                 <div class="col-lg-6">
-                                                    <button type="button" class="btn  btn-outline-primary btn-block">บันทึก</button>
+                                                    <button type="button" class="btn  btn-outline-primary btn-block" id="save_customer" name="save_customer">บันทึก</button>
                                                     <button type="button" class="btn  btn-outline-danger btn-block">ยกเลิก</button>
                                                 </div>
                                             </div>
@@ -253,6 +254,10 @@
 
     <script src="assets/libs/tobii/js/tobii.min.js"></script>
     <script src="assets/js/pages/profile.init.js"></script>
+
+    <script src="assets/js/sweetalert2.js"></script>
+    <script src="assets/js/profile-user/update-user.js"></script>
+
 
 
 
