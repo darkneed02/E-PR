@@ -56,14 +56,14 @@
                                 <div class="row g-2">
                                     <div class="col-md-4">
                                         <label class="mb-2">เอกสาร</label>
-                                        <input type="text" class="form-control" name="doc_num" id="doc_num" readonly>
+                                        <input type="text" class="form-control" name="doc_num" id="doc_num">
                                     </div><!-- end col -->
                                     <div class="col-md-4">
                                         <label class="mb-2">ประเภทเอกสาร</label>
                                         <select id="default" name="type_doc">
-                                            <option value="PR01" selected>ใบขอเสนอซื้อ</option>
-                                            <option value="PR03">ใบขอเสนอจ้าง</option>
-                                            <option value="PR02">ใบขอเสนอเช่า</option>
+                                            <option value="PR01" selected>PR01 | ใบขอเสนอซื้อ</option>
+                                            <option value="PR03">PR03 | ใบขอเสนอจ้าง</option>
+                                            <option value="PR02">PR02 | ใบขอเสนอเช่า</option>
                                         </select>
                                     </div> <!-- end col -->
                                     <div class="col-md-4">
@@ -572,7 +572,8 @@
     <script src="assets/js/sweetalert2.js"></script>
     <script src="assets/js/list_order.js"></script><!-- ตารางและ เงื่อนไขในการใช้งาน การเพิ่ม หรือลบ แถว -->
     <script src="assets/js/planning-pr/add-planning.js"></script><!-- บันทึกแผน และ บันทึกแผนร่าง -->
-    <script src="assets/js/planning-pr/gen-running.js"></script> <!-- สร้างเลขรหัสรายการออกมา -->
+    <!-- <script src="assets/js/planning-pr/gen-running.js"></script> สร้างเลขรหัสรายการออกมา -->
+    <script src="assets/js/reset-btn.js"></script>
     <script src="assets/libs/simple-datatables/umd/simple-datatables.js"></script>
     <script src="assets/js/pages/datatable.init.js"></script>
 </body>

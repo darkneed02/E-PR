@@ -1,7 +1,7 @@
 <div class="startbar d-print-none">
     <!--start brand-->
     <div class="brand">
-        <a href="index.php" class="logo">
+        <a href="#" class="logo">
             <span>
                 <img src="assets/images/logo_kyt.png" alt="logo-small" class="logo-sm">
             </span>

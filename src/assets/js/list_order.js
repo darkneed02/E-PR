@@ -15,27 +15,19 @@ function addRow(numRows = 1) {
       if (i === 0) {
         // คอลัมน์ 0: Checkbox
         cell.innerHTML = `<input class="form-check-input delete-checkbox" type="checkbox">`;
-      } else if (i === 1) {
-        // คอลัมน์ 1: รหัสรายการ (สุ่ม)
-        const randomNumber = Math.floor(
-          1000000000 + Math.random() * 9000000000
-        ); // สุ่มเลข 10 หลัก
-        cell.contentEditable = false;
-        cell.textContent = randomNumber;
       } else if (i === 7) {
         // คอลัมน์ 7: วันที่
         cell.innerHTML = `<input type="date" class="form-control" style="border: none; width: 100%; background: transparent;">`;
-      } else if ([2, 3, 6, 8, 9, 10, 11].includes(i)) {
-        // คอลัมน์ที่ต้องเปิด Modal: 2, 3, 6, 8, 9, 10, 11
-        cell.contentEditable = false;
-        cell.textContent = ""; // ค่าเริ่มต้นเป็นว่าง
+      } else if ([1, 2, 3, 6, 8, 9, 10, 11].includes(i)) {
+        // คอลัมน์ที่ต้องเปิด Modal
+        cell.contentEditable = true;
+        cell.textContent = "";
 
         cell.addEventListener("click", function () {
-          selectedCell = this; // เก็บ Cell ที่ถูกคลิก
+          selectedCell = this;
 
-          // เปิด Modal ที่เกี่ยวข้อง
           const modalId = {
-            2: "dataModal", // Modal ของคอลัมน์ 2
+            2: "dataModal",
             3: "dataModalMM",
             6: "dataModalUU",
             8: "dataModalMMG",
@@ -44,15 +36,13 @@ function addRow(numRows = 1) {
             11: "dataModalMMRL",
           }[i];
 
-          const modalInstance = new bootstrap.Modal(
-            document.getElementById(modalId)
-          );
+          const modalInstance = new bootstrap.Modal(document.getElementById(modalId));
           modalInstance.show();
         });
       } else {
         // คอลัมน์อื่นๆ
         cell.contentEditable = true;
-        cell.textContent = ""; // ค่าเริ่มต้นเป็นว่าง
+        cell.textContent = "";
       }
     }
   }
@@ -60,9 +50,7 @@ function addRow(numRows = 1) {
 
 // ฟังก์ชันลบแถว
 function deleteRow() {
-  const table = document
-    .getElementById("list_order")
-    .getElementsByTagName("tbody")[0];
+  const table = document.getElementById("list_order").getElementsByTagName("tbody")[0];
   const checkboxes = table.querySelectorAll(".delete-checkbox");
 
   let rowsDeleted = 0;
@@ -83,7 +71,19 @@ function deleteRow() {
   }
 }
 
-// ฟังก์ชันจัดการ Modal และอัปเดตข้อมูล
+// ฟังก์ชันค้นหาใน Modal
+function filterList(inputId, listId) {
+  document.getElementById(inputId).addEventListener("input", function () {
+    const filter = this.value.toLowerCase();
+    document.querySelectorAll(`#${listId} li`).forEach((item) => {
+      const text = item.textContent.toLowerCase();
+      item.style.display = text.includes(filter) ? "" : "none";
+    });
+  });
+}
+
+
+// ฟังก์ชันจัดการ Modal และอัปเดตข้อมูลในตาราง
 function setupModalHandler(modalId, listId, targetColumnIndex) {
   document.querySelectorAll(`#${listId} li`).forEach((item) => {
     item.addEventListener("click", function () {
@@ -91,29 +91,24 @@ function setupModalHandler(modalId, listId, targetColumnIndex) {
         const selectedValue = this.getAttribute("data-value");
         const selectedName = this.getAttribute("data-name");
 
-        // อัปเดตเซลล์ปัจจุบัน
         selectedCell.textContent = selectedValue;
 
-        // อัปเดต td:4 (คอลัมน์ 4)
         const row = selectedCell.closest("tr");
         if (row) {
-          const targetCell = row.cells[targetColumnIndex]; // คอลัมน์ที่ต้องการอัปเดต
+          const targetCell = row.cells[targetColumnIndex];
           if (targetCell) {
-            targetCell.textContent = selectedName; // ใส่ค่า data-name ใน td:4
+            targetCell.textContent = selectedName;
           }
         }
 
-        // ปิด Modal
-        const modalInstance = bootstrap.Modal.getInstance(
-          document.getElementById(modalId)
-        );
+        const modalInstance = bootstrap.Modal.getInstance(document.getElementById(modalId));
         modalInstance.hide();
       }
     });
   });
 }
 
-// เรียกใช้งานฟังก์ชันสำหรับ Modal
+// เรียกใช้งานฟังก์ชัน
 setupModalHandler("dataModal", "dataList");
 setupModalHandler("dataModalMM", "dataListMM", 4);
 setupModalHandler("dataModalUU", "dataListUU");
@@ -121,6 +116,15 @@ setupModalHandler("dataModalMMG", "dataListMMG");
 setupModalHandler("dataModalUI", "dataListUI");
 setupModalHandler("dataModalMMR", "dataListMMR");
 setupModalHandler("dataModalMMRL", "dataListMMRL");
+
+// เพิ่มฟังก์ชันค้นหาให้ทุก Modal
+filterList("searchInputDataModal", "dataList");
+filterList("searchInputMM", "dataListMM");
+filterList("searchInputUU", "dataListUU");
+filterList("searchInputMMG", "dataListMMG");
+filterList("searchInputUI","dataListUI");
+filterList("searchInputMMR","dataListMMR");
+filterList("searchInputMMRL","dataListMMRL");
 
 // ฟังก์ชันคำนวณราคาทั้งหมด
 function calculateTotalPrice() {
